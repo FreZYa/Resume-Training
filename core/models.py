@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class AbstractModel(models.Model):
     updated_date = models.DateTimeField(
@@ -66,3 +67,29 @@ class ImageSetting(AbstractModel):
         verbose_name = 'Image Setting'
         verbose_name_plural = 'Image Settings'
         ordering = ['name']
+
+    
+class Skill(AbstractModel):
+    order = models.IntegerField(
+        default=0,
+        verbose_name='Skill Order',
+    )
+    name = models.CharField(
+        default="",
+        max_length=254,
+        blank=True,
+        verbose_name='Skill Name',
+    )
+    percentage = models.IntegerField(
+        default=50,
+        verbose_name='Skill Percentage',
+        blank=True,
+        validators=[MinValueValidator(0), MaxValueValidator(100)]
+    )
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Skill'
+        verbose_name_plural = 'Skills'
