@@ -1,7 +1,21 @@
 from django.db import models
 
+class AbstractModel(models.Model):
+    updated_date = models.DateTimeField(
+        blank=True,
+        auto_now=True
+    )
+    created_date = models.DateTimeField(
+        blank=True,
+        auto_now_add=True
+    )
+
+    class Meta:
+        abstract = True
+        ordering = ['updated_date']
+
 # Create your models here.
-class GeneralSetting(models.Model):
+class GeneralSetting(AbstractModel):
     name = models.CharField(
         default="", 
         max_length=254, 
@@ -17,14 +31,6 @@ class GeneralSetting(models.Model):
         max_length=254,
         blank=True
     )
-    updated_date = models.DateTimeField(
-        blank=True,
-        auto_now=True
-    )
-    created_date = models.DateTimeField(
-        blank=True,
-        auto_now_add=True
-    )
 
     def __str__(self):
         return self.name
@@ -35,7 +41,7 @@ class GeneralSetting(models.Model):
         ordering = ['name']
 
 
-class ImageSetting(models.Model):
+class ImageSetting(AbstractModel):
     name = models.CharField(
         default="", 
         max_length=254, 
@@ -51,14 +57,6 @@ class ImageSetting(models.Model):
         verbose_name='Image',
         upload_to='images/',
         blank=True
-    )
-    updated_date = models.DateTimeField(
-        blank=True,
-        auto_now=True
-    )
-    created_date = models.DateTimeField(
-        blank=True,
-        auto_now_add=True
     )
 
     def __str__(self):
