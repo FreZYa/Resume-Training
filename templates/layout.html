@@ -1,0 +1,28 @@
+
+
+<!doctype html>
+<html lang="en">
+    <head>
+		{% include 'includes/head.html' %}
+    </head>
+    <body>
+        
+        <!--================Header Menu Area =================-->
+        {% include 'includes/navbar.html' %}
+
+        <!--================Home Banner Area =================-->
+
+        {% block home_banner_area %}
+        {% endblock %}
+
+
+        {% block content %}
+        {% endblock %}
+
+                <!--================Footer Area =================-->
+		{% include 'includes/footer.html' %}
+        <!--================End Footer Area =================-->
+        {% block extra_scripts %}
+        {% endblock %}
+    </body>
+</html>

@@ -16,13 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')), # core is the app name
+    path('contact/', include('contact.urls')), # contact is the app name
 ]
 
 if settings.DEBUG:
