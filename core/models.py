@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class GeneralSettings(models.Model):
+class GeneralSetting(models.Model):
     name = models.CharField(
         default="", 
         max_length=254, 
@@ -29,4 +29,7 @@ class GeneralSettings(models.Model):
     def __str__(self):
         return self.name
     
-    
+    class Meta:
+        verbose_name = 'General Setting'
+        verbose_name_plural = 'General Settings'
+        ordering = ['name']
