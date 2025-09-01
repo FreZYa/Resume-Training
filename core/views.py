@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from core.models import GeneralSetting, ImageSetting, Skill
+from core.models import GeneralSetting, ImageSetting, Skill, Experience, Education, SocialMedia
 
 # Create your views here.
 def home(request):
@@ -15,8 +15,11 @@ def home(request):
     header_logo = ImageSetting.objects.get(name='header_logo').file
     home_banner_image = ImageSetting.objects.get(name='home_banner_image').file
     site_favicon = ImageSetting.objects.get(name='site_favicon').file
+    educations = Education.objects.all().order_by('start_date')
 
     skills = Skill.objects.all().order_by('order')
+    experiences = Experience.objects.all().order_by('start_date')
+    social_medias = SocialMedia.objects.all().order_by('order')
     context = {
         'site_title': site_title,
         'site_keywords': site_keywords,
@@ -30,5 +33,8 @@ def home(request):
         'home_banner_image': home_banner_image,
         'site_favicon': site_favicon,
         'skills': skills,
+        'experiences': experiences,
+        'educations': educations,
+        'social_medias': social_medias,
     }
     return render(request, 'index.html', context)

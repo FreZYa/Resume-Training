@@ -23,9 +23,9 @@
 								<li><a href="#"><i class="lnr lnr-home"></i> Santa monica bullevard</a></li>
 							</ul>
 							<ul class="list personal_social">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+								{% for social_media in social_medias %}
+									<li><a href="{{social_media.link}}">{{social_media.icon|safe}}</a></li>
+								{% endfor %}
 							</ul>
 						</div>
 					</div>
@@ -106,82 +106,38 @@
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 						<ul class="list">
-							<li>
-								<span></span>
-								<div class="media">
-									<div class="d-flex">
-										<p>March 2017 to present</p>
+							{% for experience in experiences %}
+								<li>
+									<span></span>
+									<div class="media">
+										<div class="d-flex">
+											<p>{{ experience.start_date }} to{% if experience.end_date %} {{ experience.end_date }} {% else %} present {% endif %}</p>
+										</div>
+										<div class="media-body">
+											<h4>{{ experience.company_name }}</h4>
+											<p>{{ experience.job_title }} <br />{{ experience.job_location }}</p>
+										</div>
 									</div>
-									<div class="media-body">
-										<h4>Colorlib</h4>
-										<p>Senior Web Developer <br />Santa monica, Los angeles</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<span></span>
-								<div class="media">
-									<div class="d-flex">
-										<p>March 2017 to present</p>
-									</div>
-									<div class="media-body">
-										<h4>Colorlib</h4>
-										<p>Senior Web Developer <br />Santa monica, Los angeles</p>
-									</div>
-								</div>
-							</li>
-							<li>
-							<span></span>
-								<div class="media">
-									<div class="d-flex">
-										<p>March 2017 to present</p>
-									</div>
-									<div class="media-body">
-										<h4>Colorlib</h4>
-										<p>Senior Web Developer <br />Santa monica, Los angeles</p>
-									</div>
-								</div>
-							</li>
+								</li>
+							{% endfor %}
 						</ul>
 					</div>
 					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 						<ul class="list">
-							<li>
-								<span></span>
-								<div class="media">
-									<div class="d-flex">
-										<p>March 2017 to present</p>
+							{% for education in educations %}
+								<li>
+									<span></span>
+									<div class="media">
+										<div class="d-flex">
+											<p>{{ education.start_date }} to{% if education.end_date %} {{ education.end_date }} {% else %} present {% endif %}</p>
+										</div>
+										<div class="media-body">
+											<h4>{{ education.school_name }}</h4>
+											<p>{{ education.major }} <br />{{ education.department }}</p>
+										</div>
 									</div>
-									<div class="media-body">
-										<h4>Colorlib</h4>
-										<p>Senior Web Developer <br />Santa monica, Los angeles</p>
-									</div>
-								</div>
-							</li>
-							<li>
-								<span></span>
-								<div class="media">
-									<div class="d-flex">
-										<p>March 2017 to present</p>
-									</div>
-									<div class="media-body">
-										<h4>Colorlib</h4>
-										<p>Senior Web Developer <br />Santa monica, Los angeles</p>
-									</div>
-								</div>
-							</li>
-							<li>
-							<span></span>
-								<div class="media">
-									<div class="d-flex">
-										<p>March 2017 to present</p>
-									</div>
-									<div class="media-body">
-										<h4>Colorlib</h4>
-										<p>Senior Web Developer <br />Santa monica, Los angeles</p>
-									</div>
-								</div>
-							</li>
+								</li>
+							{% endfor %}
 						</ul>
 					</div>
 				</div>

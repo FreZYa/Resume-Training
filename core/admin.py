@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import GeneralSetting, ImageSetting, Skill, Experience
+from core.models import GeneralSetting, ImageSetting, Skill, Experience, Education, SocialMedia
 # Register your models here.
 
 class GeneralSettingAdmin(admin.ModelAdmin):
@@ -29,3 +29,17 @@ class ExperienceAdmin(admin.ModelAdmin):
     list_filter = ('updated_date', 'created_date')
 
 admin.site.register(Experience, ExperienceAdmin)
+
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ('id', 'school_name', 'major', 'department', 'start_date', 'end_date', 'updated_date', 'created_date')
+    search_fields = ('school_name', 'major', 'department')
+    list_filter = ('updated_date', 'created_date')
+
+admin.site.register(Education, EducationAdmin)
+
+class SocialMediaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'order', 'link', 'icon', 'updated_date', 'created_date')
+    search_fields = ('link', 'icon')
+    list_filter = ('updated_date', 'created_date')
+
+admin.site.register(SocialMedia, SocialMediaAdmin)

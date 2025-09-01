@@ -122,6 +122,7 @@ class Experience(AbstractModel):
         default=None,
         verbose_name='End Date',
         null=True,
+        blank=True,
     )
 
     def __str__(self):
@@ -131,3 +132,69 @@ class Experience(AbstractModel):
         verbose_name = 'Experience'
         verbose_name_plural = 'Experiences'
         ordering = ['start_date']
+
+
+
+class Education(AbstractModel):
+    school_name = models.CharField(
+        default="",
+        max_length=254,
+        blank=True,
+        verbose_name='School Name',
+    )
+    major = models.CharField(
+        default="",
+        max_length=254,
+        blank=True,
+        verbose_name='Major',
+    )
+    department = models.CharField(
+        default="",
+        max_length=254,
+        blank=True,
+        verbose_name='Department',
+    )
+    start_date = models.DateField(
+        verbose_name='Start Date',
+    )
+    end_date = models.DateField(
+        default=None,
+        verbose_name='End Date',
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return self.school_name
+    
+    class Meta:
+        verbose_name = 'Education'
+        verbose_name_plural = 'Educations'
+        ordering = ['start_date']
+
+
+class SocialMedia(AbstractModel):
+    order = models.IntegerField(
+        default=0,
+        verbose_name='Social Media Order',
+    )
+    link = models.URLField(
+        default="",
+        max_length=254,
+        blank=True,
+        verbose_name='Link',
+    )
+    icon = models.CharField(
+        default="",
+        max_length=254,
+        blank=True,
+        verbose_name='Icon',
+    )
+
+    def __str__(self):
+        return self.link
+    
+    class Meta:
+        verbose_name = 'Social Media'
+        verbose_name_plural = 'Social Medias'
+        ordering = ['link']
