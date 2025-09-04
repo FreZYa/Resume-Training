@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import GeneralSetting, ImageSetting, Skill, Experience, Education, SocialMedia
+from core.models import GeneralSetting, ImageSetting, Skill, Experience, Education, SocialMedia, Document
 # Register your models here.
 
 class GeneralSettingAdmin(admin.ModelAdmin):
@@ -43,3 +43,10 @@ class SocialMediaAdmin(admin.ModelAdmin):
     list_filter = ('updated_date', 'created_date')
 
 admin.site.register(SocialMedia, SocialMediaAdmin)
+
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'order', 'slug', 'name', 'button_text', 'file', 'updated_date', 'created_date')
+    search_fields = ('name', 'button_text', 'file', 'slug')
+    list_filter = ('updated_date', 'created_date')
+
+admin.site.register(Document, DocumentAdmin)

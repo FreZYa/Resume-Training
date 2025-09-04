@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect
+from core.models import GeneralSetting, ImageSetting, Skill, Experience, Education, SocialMedia, Document
 
-from core.models import GeneralSetting, ImageSetting, Skill, Experience, Education, SocialMedia
 
-# Create your views here.
-def home(request):
+def layout(request):
+    documents = Document.objects.all().order_by('order')
     site_title = GeneralSetting.objects.get(name='site_title').parameter
     site_keywords = GeneralSetting.objects.get(name='site_keywords').parameter
     site_description = GeneralSetting.objects.get(name='site_description').parameter
@@ -15,12 +16,11 @@ def home(request):
     header_logo = ImageSetting.objects.get(name='header_logo').file
     home_banner_image = ImageSetting.objects.get(name='home_banner_image').file
     site_favicon = ImageSetting.objects.get(name='site_favicon').file
-    educations = Education.objects.all().order_by('start_date')
 
     skills = Skill.objects.all().order_by('order')
-    experiences = Experience.objects.all().order_by('start_date')
     social_medias = SocialMedia.objects.all().order_by('order')
     context = {
+        'documents': documents,
         'site_title': site_title,
         'site_keywords': site_keywords,
         'site_description': site_description,
@@ -33,8 +33,26 @@ def home(request):
         'home_banner_image': home_banner_image,
         'site_favicon': site_favicon,
         'skills': skills,
-        'experiences': experiences,
-        'educations': educations,
         'social_medias': social_medias,
     }
+    return context
+
+# Create your views here.
+def home(request):
+
+    experiences = Experience.objects.all().order_by('start_date')
+    educations = Education.objects.all().order_by('start_date')
+
+    context = {
+        'experiences': experiences,
+        'educations': educations,
+    }
     return render(request, 'index.html', context)
+
+
+def redirect_urls(request, slug):
+    document = get_object_or_404(Document, slug=slug)
+    if document.file and document.file.url:
+        return redirect(document.file.url)
+    else:
+        return redirect('home')
