@@ -21,6 +21,10 @@ class ContactForm(forms.ModelForm):
         help_text='Enter your message',
     )
 
+    class Meta:
+        model = Message
+        fields = ['name', 'email', 'subject', 'message']
+
     def send_mail(self):
         if self.is_valid():
             name = self.cleaned_data['name']
@@ -33,8 +37,7 @@ class ContactForm(forms.ModelForm):
                               'Subject: {subject} \n' \
                               'Message: {message}'
             message_context = message_context.format(name=name, email=email, subject=subject, message=message)
-            email = EmailMessage(subject, message_context, to=[settings.DEFAULT_FROM_EMAIL], reply_to=[email]).send()
-            email.send()
+            EmailMessage(subject, message_context, to=[settings.DEFAULT_FROM_EMAIL], reply_to=[email]).send()
             return True
         else:
             return False

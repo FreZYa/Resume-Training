@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      SECRET_KEY: ci-only-not-secret
+      DEBUG: "False"
+      ALLOWED_HOSTS: localhost,testserver
+      CSRF_TRUSTED_ORIGINS: http://localhost
+      EMAIL_URL: consolemail://
+      DEFAULT_FROM_EMAIL: ci@example.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python manage.py check
+      - run: python manage.py test
